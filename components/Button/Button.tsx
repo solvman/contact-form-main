@@ -1,12 +1,19 @@
-type ButtonProps = {
-  children: React.ReactNode;
-};
+import { cn } from "@/utils/utils";
+import { ButtonHTMLAttributes } from "react";
 
-const Button = ({ children }: ButtonProps) => {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  children: React.ReactNode;
+}
+
+const Button = ({ children, className, ...rest }: ButtonProps) => {
   return (
     <button
       type="submit"
-      className="body-m-bold w-full rounded-lg bg-primary-600 px-500 py-200 text-white transition hover:bg-button-hover"
+      className={cn(
+        "body-m-bold w-full rounded-lg bg-primary-600 px-500 py-200 text-white transition hover:bg-button-hover",
+        className,
+      )}
+      {...rest}
     >
       {children}
     </button>

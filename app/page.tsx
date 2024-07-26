@@ -26,7 +26,7 @@ export default function Home() {
   const {
     register,
     setFocus,
-    formState: { errors },
+    formState: { errors, isDirty, isSubmitting },
     handleSubmit,
     reset,
   } = useForm<FormData>({
@@ -41,14 +41,15 @@ export default function Home() {
   });
 
   useEffect(() => {
-    setFocus("firstName");
-  }, [setFocus]);
+    if (!isDirty) {
+      setFocus("firstName");
+    }
+  }, [setFocus, isDirty]);
 
   useEffect(() => {
     const timerId = setTimeout(() => {
       setIsShown(false);
       reset();
-      setFocus("firstName");
     }, 2500);
 
     return () => {
@@ -152,7 +153,7 @@ export default function Home() {
             label="I agree to the Privacy Policy"
             error={errors.consent?.message}
           />
-          <Button>Submit</Button>
+          <Button disabled={isSubmitting}>Submit</Button>
         </form>
       </article>
     </main>
