@@ -3,8 +3,6 @@ interface FieldErrorProps {
 }
 
 const FieldError = ({ message }: FieldErrorProps) => {
-  console.log(message);
-
   if (!message) return null;
 
   return (

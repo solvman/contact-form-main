@@ -1,13 +1,14 @@
 "use client";
+
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+
 import Button from "@/components/Button";
 import Consent from "@/components/Consent";
 import FieldError from "@/components/FieldError";
 import Input from "@/components/Input";
 import TextArea from "@/components/TextArea";
 import Toast from "@/components/Toast";
-import { cn } from "@/utils/utils";
-import { useEffect, useState } from "react";
-import { useForm, type SubmitHandler } from "react-hook-form";
 
 const ERROR_FIELD_REQUIRED = "This field is required";
 
@@ -55,6 +56,11 @@ export default function Home() {
     };
   }, [isShown, reset, setFocus]);
 
+  function submitHandler(data: FormData) {
+    setIsShown(true);
+    console.log(data);
+  }
+
   return (
     <main className="min-h-screen items-center justify-center bg-primary-200 px-200 py-400 sm:flex">
       <h1 className="sr-only">
@@ -65,10 +71,7 @@ export default function Home() {
         <h2 className="heading mb-400">Contact Us</h2>
         <form
           className="flex flex-col gap-300"
-          onSubmit={handleSubmit((data) => {
-            setIsShown(true);
-            console.log(data);
-          })}
+          onSubmit={handleSubmit(submitHandler)}
         >
           <div className="flex flex-col gap-300 sm:flex-row sm:gap-200">
             <Input
