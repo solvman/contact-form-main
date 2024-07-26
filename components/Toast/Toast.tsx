@@ -6,11 +6,11 @@ type ToastProps = {
 
 const Toast = ({ isShown = false }: ToastProps) => {
   return (
-    <div className="fixed top-0 left-1/2 -translate-x-1/2">
+    <div className="fixed left-1/2 top-0 z-50 -translate-x-1/2">
       <article
         className={cn(
-          "bg-secondary-900 text-white p-300 rounded-lg relative -top-[110px] opacity-0 transition-all duration-250",
-          { "opacity-100 translate-y-[140px]": isShown }
+          "duration-250 relative -top-[110px] rounded-lg bg-secondary-900 p-300 text-white opacity-0 transition-all",
+          { "translate-y-[140px] opacity-100": isShown },
         )}
       >
         <header className="flex flex-row gap-100">

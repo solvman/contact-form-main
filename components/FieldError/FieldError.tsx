@@ -1,12 +1,20 @@
+import { cn } from "@/utils/utils";
+
 interface FieldErrorProps {
   message?: string;
+  className?: string;
 }
 
-const FieldError = ({ message }: FieldErrorProps) => {
+const FieldError = ({ className, message }: FieldErrorProps) => {
   if (!message) return null;
 
   return (
-    <em className="body-sm absolute -bottom-[22px] left-0 not-italic text-error">
+    <em
+      className={cn(
+        "body-sm absolute -bottom-[22px] left-0 not-italic text-error",
+        className,
+      )}
+    >
       {message}
     </em>
   );
