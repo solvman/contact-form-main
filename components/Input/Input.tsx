@@ -1,5 +1,6 @@
-import { cn } from "@/utils/utils";
 import React, { InputHTMLAttributes, useId, forwardRef, Ref } from "react";
+import { cn } from "@/utils/utils";
+import FieldError from "../FieldError";
 
 interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "className"> {
@@ -29,11 +30,7 @@ const Input = forwardRef(function Input(
             error,
         })}
       />
-      {error && (
-        <em className="body-sm absolute -bottom-[22px] left-0 not-italic text-error">
-          {error}
-        </em>
-      )}
+      <FieldError message={error} />
     </div>
   );
 });

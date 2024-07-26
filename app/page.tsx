@@ -1,6 +1,11 @@
 "use client";
+import Button from "@/components/Button";
+import Consent from "@/components/Consent";
+import FieldError from "@/components/FieldError";
 import Input from "@/components/Input";
+import TextArea from "@/components/TextArea";
 import Toast from "@/components/Toast";
+import { cn } from "@/utils/utils";
 import { useEffect, useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 
@@ -107,11 +112,13 @@ export default function Home() {
           </div>
           <fieldset className="flex flex-col gap-200">
             <legend className="required mb-200">Query Type</legend>
-            <div className="flex flex-col gap-200 sm:flex-row">
+            <div className="relative flex flex-col gap-200 sm:flex-row">
               <label className="radio-btn flex flex-row gap-150">
                 <input
                   type="radio"
-                  {...register("queryType", { required: ERROR_FIELD_REQUIRED })}
+                  {...register("queryType", {
+                    required: "Please select a query type",
+                  })}
                   value="general"
                 />
                 General Enquiry
@@ -119,36 +126,30 @@ export default function Home() {
               <label className="radio-btn flex flex-row gap-150">
                 <input
                   type="radio"
-                  {...register("queryType", { required: ERROR_FIELD_REQUIRED })}
+                  {...register("queryType", {
+                    required: "Please select a query type",
+                  })}
                   value="support"
                 />
                 Support Request
               </label>
+              <FieldError message={errors.queryType?.message} />
             </div>
           </fieldset>
-          <div className="flex flex-1 flex-col gap-100">
-            <label htmlFor="message" className="required">
-              Message
-            </label>
-            <textarea
-              id="message"
-              className="h-[240px] resize-none px-300 py-150 sm:h-[132px] md:h-[105px]"
-            />
-            <em className="hidden">Error</em>
-          </div>
-          <div className="my-200 flex flex-row items-center gap-200">
-            <input type="checkbox" name="consent" id="consent" />
-            <label htmlFor="consent" className="required">
-              I consent to being contacted by the team
-            </label>
-            <em className="hidden">Error</em>
-          </div>
-          <button
-            type="submit"
-            className="body-m-bold w-full rounded-lg bg-primary-600 px-500 py-200 text-white transition hover:bg-button-hover"
-          >
-            Submit
-          </button>
+          <TextArea
+            label="Message"
+            {...register("message", { required: ERROR_FIELD_REQUIRED })}
+            error={errors.message?.message}
+          />
+          <Consent
+            {...register("consent", {
+              required:
+                "To submit this form, please consent to being contacted",
+            })}
+            label="I agree to the Privacy Policy"
+            error={errors.consent?.message}
+          />
+          <Button>Submit</Button>
         </form>
       </article>
     </main>
