@@ -37,21 +37,6 @@ const config: Config = {
         500: "40px",
         1600: "128px",
       },
-      keyframes: {
-        toast: {
-          "0%, 50%": {
-            opacity: "1",
-            transform: "translateY(calc(100% + 24px))",
-          },
-          "80%, 100%": {
-            opacity: "0",
-            transform: "translateY(-calc(100% + 24px))",
-          },
-        },
-      },
-      animation: {
-        toast: "toast 5000ms cubic-bezier(0, 0.46, 0, 1.04) both",
-      },
     },
   },
   plugins: [require("@tailwindcss/forms")],
